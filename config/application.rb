@@ -27,7 +27,7 @@ module Or1App
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
-    config.autoload_paths << Rails.root.join('app/lib')
+    config.autoload_paths << Rails.root.join("app/lib")
 
 
     # Configuration for the application, engines, and railties goes here.
@@ -45,4 +45,4 @@ module Or1App
   end
 end
 
-Rails.application.routes.default_url_options[:host] = 'http://localhost:3001'
+Rails.application.routes.default_url_options[:host] = "http://localhost:3001"

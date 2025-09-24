@@ -1,6 +1,6 @@
 class Api::V1::AuthController < ApplicationController
-skip_before_action :authorize_request, only: [:signup, :login]
- 
+skip_before_action :authorize_request, only: [ :signup, :login ]
+
 # ✅ POST /signup
 def signup
 user = User.new(user_params)
@@ -20,7 +20,7 @@ else
 render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
 end
 end
- 
+
 # ✅ POST /login
 def login
 user = User.find_by(email: params[:email])
@@ -37,12 +37,12 @@ avatar_url: user.avatar.attached? ? url_for(user.avatar) : nil
 }
 }, status: :ok
 else
-render json: { error: 'unauthorized' }, status: :unauthorized
+render json: { error: "unauthorized" }, status: :unauthorized
 end
 end
- 
+
 private
- 
+
 # ✅ Permit avatar upload along with other user fields
 def user_params
 params.permit(:name, :email, :password, :password_confirmation, :role, :avatar)

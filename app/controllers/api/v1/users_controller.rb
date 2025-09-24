@@ -4,10 +4,10 @@ class Api::V1::UsersController < ApplicationController
   # ✅ GET /users
   def index
     users = case @current_user.role
-            when 'superadmin' then User.all
-            when 'admin' then User.where.not(role: 'superadmin')
-            else return render json: { error: 'unauthorized' }, status: :unauthorized
-            end
+    when "superadmin" then User.all
+    when "admin" then User.where.not(role: "superadmin")
+    else return render json: { error: "unauthorized" }, status: :unauthorized
+    end
 
     render json: users.map { |u| user_json(u) }
   end
@@ -15,10 +15,10 @@ class Api::V1::UsersController < ApplicationController
   # ✅ GET /users/:id
   def show
     user = User.find(params[:id])
-    if @current_user.role == 'superadmin' || (@current_user.role == 'admin' && user.role != 'superadmin') || @current_user.id == user.id
+    if @current_user.role == "superadmin" || (@current_user.role == "admin" && user.role != "superadmin") || @current_user.id == user.id
       render json: user_json(user)
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      render json: { error: "unauthorized" }, status: :unauthorized
     end
   end
 
@@ -30,8 +30,8 @@ class Api::V1::UsersController < ApplicationController
   # ✅ POST /users  <-- NEW ACTION
   def create
     # Only superadmin/admin can create users
-    unless @current_user.role == 'superadmin' || @current_user.role == 'admin'
-      return render json: { error: 'unauthorized' }, status: :unauthorized
+    unless @current_user.role == "superadmin" || @current_user.role == "admin"
+      return render json: { error: "unauthorized" }, status: :unauthorized
     end
 
     user = User.new(user_params)
@@ -45,8 +45,8 @@ class Api::V1::UsersController < ApplicationController
   # ✅ PUT /users/:id
   def update
     user = User.find(params[:id])
-    if @current_user.role == 'superadmin' ||
-       (@current_user.role == 'admin' && user.role != 'superadmin') ||
+    if @current_user.role == "superadmin" ||
+       (@current_user.role == "admin" && user.role != "superadmin") ||
        @current_user.id == user.id
 
       if user.update(user_params)
@@ -55,18 +55,18 @@ class Api::V1::UsersController < ApplicationController
         render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      render json: { error: "unauthorized" }, status: :unauthorized
     end
   end
 
   # ✅ DELETE /users/:id
   def destroy
     user = User.find(params[:id])
-    if @current_user.role == 'superadmin'
+    if @current_user.role == "superadmin"
       user.destroy
-      render json: { message: 'User deleted' }
+      render json: { message: "User deleted" }
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      render json: { error: "unauthorized" }, status: :unauthorized
     end
   end
 
