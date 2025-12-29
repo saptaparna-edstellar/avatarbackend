@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2", ">= 8.0.2.1"
 
 # PostgreSQL
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.6"
 
 # Puma web server
 gem "puma", ">= 5.0"
