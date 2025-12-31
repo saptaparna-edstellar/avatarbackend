@@ -12,7 +12,7 @@ gem "puma", ">= 5.0"
 # Authentication & Authorization
 gem "devise"
 gem "jwt"
-gem "bcrypt", "~> 3.1.17"
+gem "bcrypt", "~> 3.1.21"
 
 # CORS for API
 gem "rack-cors"
